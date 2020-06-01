@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- ajax import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        listing();
+        getEx();
+      });
+
+      function listing() {
+        $.ajax({
+          type: "GET",
+          url: "/order",
+          data: {},
+          success: function (response) {
+            let orders = response["orders"];
+            for (let i = 0; i < orders.length; i++) {
+              make_card(
+                orders[i]["name"],
+                orders[i]["quant"],
+                orders[i]["phone"],
+                orders[i]["address"]
+              );
+            }
+          },
+        });
+      }
+
+      function make_card(name, quant, phone, address) {
+        let temp_html = `<tr>
+                          <td>${name}</td>
+                          <td>${quant}</td>
+                          <td>${phone}</td>
+                          <td>${address}</td>
+                        </tr>`;
+        $("#orders-list").append(temp_html);
+      }
+
+      function posting() {
+        let name = $("#input1").val();
+        let quant = $("#input2").val();
+        let phone = $("#input3").val();
+        let address = $("#input4").val();
+
+        $.ajax({
+          type: "POST", // POST 방식으로 요청하겠다.
+          url: "/order", // /memo라는 url에 요청하겠다.
+          data: {
+            name_give: name,
+            quant_give: quant,
+            phone_give: phone,
+            address_give: address,
+          }, // 데이터를 주는 방법
+          success: function (response) {
+            // 성공하면
+            if (response["result"] == "success") {
+              alert("주문 성공!");
+              window.location.reload();
+            } else {
+              alert("서버 오류!");
+            }
+          },
+        });
+      }
+
+      function getEx() {
+        $.ajax({
+          type: "GET",
+          url: "https://api.manana.kr/exchange/rate.json",
+          data: {},
+          success: function (response) {
+            let exchangeRate = response[1].rate;
+            $("#exchangeId").append(exchangeRate);
+          },
+        });
+      }
+    </script>
+    <!-- style -->
+    <style type="text/css">
+      * {
+        font-family: "Nanum Gothic", sans-serif;
+        font-size: 13px;
+      }
+
+      .wrap {
+        width: 1200px;
+        margin: 20px auto;
+        padding: 100px;
+        border: black solid 1px;
+        border-radius: 5px;
+      }
+
+      div {
+        margin: auto;
+      }
+
+      .carousel {
+        padding: 50px;
+      }
+
+      .exchangeClass {
+        margin-bottom: 20px;
+      }
+
+      .product_area {
+        margin-bottom: 20px;
+      }
+
+      .order_area {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    </style>
+
+    <title>스파르타코딩클럽 | 1주차 숙제_권영빈</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div
+        id="carouselExampleSlidesOnly"
+        class="carousel slide"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw8d7231c5/images/57915001/Rebel_57915001_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="First slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw7ef378ca/images/57915001/Rebel_57915001-00_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="Second slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw00f1a922/images/57915001/Rebel_57915001-01_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="Third slide"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="product product_area">
+        <div class="product_name">
+          <h1>상품명: 나이키 머큐리얼 수퍼플라이 VII 엘리트</h1>
+          <h5>가격 : $35만원 / 켤레</h5>
+        </div>
+        <div class="product_desc">
+          <p class="product_description">
+            나이키 머큐리얼 수퍼플라이 VII 엘리트는 2020년도에 신규로 출시된
+            축구화로, 플레이어의 스피드와 방향 전환을 극대화합니다.
+          </p>
+          <ul class="list-group">
+            <li class="list-group-item">
+              360도 방향 전환과 미끄러운 필드에서도 안정감을 선사합니다.
+            </li>
+            <li class="list-group-item">
+              '나이키스킨' 기술이 축구화의 앞 면에 적용되어 보다 정교한 터치와
+              슈팅이 가능합니다.
+            </li>
+            <li class="list-group-item">
+              이 축구화의 '수퍼나이키'존은 찰나의 순간에서도 상대 선수보다 약
+              0.2~0.5초 이상의 순간 스피드 가속을 돕습니다.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="exchangeId" class="exchangeClass">
+        환율 (달러-원):
+      </div>
+
+      <div class="product order_area">
+        <h1>주문하기</h1>
+        <div class="forms">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">주문자 성함</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input1"
+              placeholder="홍길동"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">수량</label>
+            <input type="number" id="input2" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">전화번호</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input3"
+              placeholder="010-1234-1234"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">주소</label>
+            <textarea class="form-control" id="input4" rows="3"></textarea>
+          </div>
+        </div>
+        <button
+          onclick="posting()"
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+        >
+          주문하기
+        </button>
+      </div>
+      <div class="orders">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">주문자 성함</th>
+              <th scope="col">수량</th>
+              <th scope="col">전화번호</th>
+              <th scope="col">주소</th>
+            </tr>
+          </thead>
+          <tbody id="orders-list"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

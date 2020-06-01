@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- ajax import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function order() {
+        if ($("#input1").val().length == 0) {
+          alert("이름을 입력해주세요.");
+        } else if ($("#input2").val().length == 0) {
+          alert("수량을 입력해주세요.");
+        } else if ($("#input3").val().length == 0) {
+          alert("전화번호를 입력해주세요.");
+        } else if ($("#input4").val().length == 0) {
+          alert("주소를 입력해주세요.");
+        } else {
+          alert("주문이 완료되었습니다");
+        }
+      }
+    </script>
+    <script>
+      function getEx() {
+        $.ajax({
+          type: "GET",
+          url: "https://api.manana.kr/exchange/rate.json",
+          data: {},
+          success: function (response) {
+            let exchangeRate = response[1].rate;
+            $("#exchangeId").append(exchangeRate);
+          },
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        alert("다 로딩됐다!");
+        getEx();
+      });
+    </script>
+
+    <title>스파르타코딩클럽 | 1주차 숙제_권영빈</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div
+        id="carouselExampleSlidesOnly"
+        class="carousel slide"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw8d7231c5/images/57915001/Rebel_57915001_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="First slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw7ef378ca/images/57915001/Rebel_57915001-00_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="Second slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="https://www.rebelsport.com.au/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw00f1a922/images/57915001/Rebel_57915001-01_bluewhite_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+              alt="Third slide"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="product product_area">
+        <div class="product_name">
+          <h1>상품명: Nike Mercurial Superfly VII Elite</h1>
+          <h5>가격 : $319.99 / 켤레</h5>
+        </div>
+        <div class="product_desc">
+          <p class="product_description">
+            Redefine speed with the Nike Mercurial Superfly VII Elite Football
+            Boots. Taking the lightweight form-fitting construction of their
+            predecessor, the Mercurial 7 integrate new high tenacity yarn into
+            the 360 Flyknit upper to provide a more supportive fit. High-speed
+            touch remains exceptionally responsive with the NIKESKIN overlay and
+            All Conditions Control providing clean, controlled touch regardless
+            of the weather.
+          </p>
+          <ul class="list-group">
+            <li class="list-group-item">
+              Finessed 360 Flyknit upper utilises high tenacity yarn for a more
+              secured fit
+            </li>
+            <li class="list-group-item">
+              Nikeskin overlay and ACC technology in the forefoot for controlled
+              touch no matter the conditions
+            </li>
+            <li class="list-group-item">
+              Aerotrak zone in the forefoot provides a slightly stiffer chassis
+              to supercharge speed
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="exchangeId" class="exchangeClass">
+        환율 (달러-원):
+      </div>
+
+      <div class="product order_area">
+        <h1>주문하기</h1>
+        <div class="forms">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">주문자 성함</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input1"
+              placeholder="홍길동"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">수량</label>
+            <input type="number" id="input2" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">전화번호</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input3"
+              placeholder="010-1234-1234"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">주소</label>
+            <textarea class="form-control" id="input4" rows="3"></textarea>
+          </div>
+        </div>
+        <button
+          onclick="order()"
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+        >
+          주문하기
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

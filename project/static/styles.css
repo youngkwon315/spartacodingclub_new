@@ -1,0 +1,18 @@
+.jumbotron {
+  background-color: #3d9970;
+  color: white;
+  width: 1700px;
+  margin: 20px auto 20px auto;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.card-deck {
+  width: 1700px;
+  margin: 20px auto 20px auto;
+}

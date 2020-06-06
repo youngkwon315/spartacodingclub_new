@@ -19,18 +19,29 @@ def get_urls():
         '#js-ex-category-body > div.ExCategory-results > div')
 
     for workout in workouts:
-        img = workout.select_one(
-            '#js-ex-category-body > div.ExCategory-results > div:nth-child(2) > div:nth-child(1) > img')
+        img = workout.select_one('div:nth-child(1) > img')
         test = workout.select_one(
             'div.ExResult-cell.ExResult-cell--nameEtc > h3')
         part = workout.select_one(
             'div.ExResult-cell.ExResult-cell--nameEtc > div > a')
 
-        if test is not None:
-            image = img['src']
+        if img is not None:
+            img_url = img['src']
             title = test.text.strip()
             part = part.text.strip()
-            print(image, title, part)
+
+            doc = {
+                'workout_name': title,
+                'img_url': img_url,
+                'workout_part': part
+            }
+            db.fitlogdb.insert_one(doc)
+            print('완료!', title)
 
 
-get_urls()
+def newly_insert():
+    db.fitlogdb.drop()
+    get_urls()
+
+
+newly_insert()

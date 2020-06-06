@@ -12,7 +12,6 @@
   margin-bottom: 30px;
 }
 
-.card-deck {
-  width: 1700px;
-  margin: 20px auto 20px auto;
+#card-box > div:nth-child(1) {
+  width: 100%;
 }

@@ -16,19 +16,14 @@
       crossorigin="anonymous"
     />
 
-    <!-- CSS linked -->
-    <link rel="stylesheet" href="../static/styles.css" />
-
-    <title>Fitlog</title>
-  </head>
-  <body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--<script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
-    ></script>
+    ></script>-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -40,16 +35,52 @@
       crossorigin="anonymous"
     ></script>
 
+    <script>
+      $(document).ready(function () {
+        show_workouts();
+      });
+
+      function show_workouts() {
+        $("#card-box").empty();
+
+        $.ajax({
+          type: "GET",
+          url: "/api/list",
+          data: {},
+          success: function (response) {
+            let workouts = response["workouts_list"];
+
+            for (let i = 0; i < workouts.length; i++) {
+              let workout = workouts[i];
+              let img_url = workout["img_url"];
+              let workout_title = workout["workout_name"];
+              let workout_part = workout["workout_part"];
+
+              let temp_html = `
+                                <div class="card" style="width: 18rem;">
+                                <img src="${img_url}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                </div>
+                            `;
+
+              $("#card-box").append(temp_html);
+            }
+          },
+        });
+      }
+    </script>
+
+    <!-- CSS linked -->
+    <link rel="stylesheet" href="../static/styles.css" />
+
+    <title>Fitlog</title>
+  </head>
+  <body>
     <!-- Image and text -->
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
-        <img
-          src="/docs/4.0/assets/brand/bootstrap-solid.svg"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-        />
         Fitlog
       </a>
     </nav>
@@ -70,92 +101,7 @@
       <button type="button" class="btn btn-secondary">Etc</button>
     </div>
     <div class="card-deck">
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP7J-MS96L8-eJPAWe93kwZVVyixnsYdckLG5vyDlH6f3h-Tkd&usqp=CAU"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP7J-MS96L8-eJPAWe93kwZVVyixnsYdckLG5vyDlH6f3h-Tkd&usqp=CAU"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This card has supporting text below as a natural lead-in to
-            additional content.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP7J-MS96L8-eJPAWe93kwZVVyixnsYdckLG5vyDlH6f3h-Tkd&usqp=CAU"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP7J-MS96L8-eJPAWe93kwZVVyixnsYdckLG5vyDlH6f3h-Tkd&usqp=CAU"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTP7J-MS96L8-eJPAWe93kwZVVyixnsYdckLG5vyDlH6f3h-Tkd&usqp=CAU"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
+      <div class="row row-cols-1 row-cols-md-3" id="card-box"></div>
     </div>
   </body>
 </html>

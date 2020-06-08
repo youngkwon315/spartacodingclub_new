@@ -1,8 +1,6 @@
 .jumbotron {
   background-color: #3d9970;
   color: white;
-  width: 1700px;
-  margin: 20px auto 20px auto;
 }
 
 .btn-group {
@@ -12,6 +10,6 @@
   margin-bottom: 30px;
 }
 
-#card-box > div:nth-child(1) {
-  width: 100%;
+.card-group {
+  text-align: center;
 }

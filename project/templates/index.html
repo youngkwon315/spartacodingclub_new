@@ -41,7 +41,7 @@
       });
 
       function show_workouts() {
-        $("#card-box").empty();
+        $(".card-group").empty();
 
         $.ajax({
           type: "GET",
@@ -56,16 +56,15 @@
               let workout_title = workout["workout_name"];
               let workout_part = workout["workout_part"];
 
-              let temp_html = `
-                                <div class="card" style="width: 18rem;">
-                                <img src="${img_url}" class="card-img-top" alt="...">
+              let temp_html = `<div class="card-box" style="width:200px">
+                                <img src="${img_url}" class="card-img" alt="...">
                                 <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">${workout_title}</p>
+                                <p class="card-text">${workout_part}</p>
                                 </div>
-                                </div>
-                            `;
+                              </div>`;
 
-              $("#card-box").append(temp_html);
+              $(".card-group").append(temp_html);
             }
           },
         });
@@ -73,7 +72,7 @@
     </script>
 
     <!-- CSS linked -->
-    <link rel="stylesheet" href="../static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./static/styles.css" />
 
     <title>Fitlog</title>
   </head>
@@ -100,8 +99,6 @@
       <button type="button" class="btn btn-secondary">Leg</button>
       <button type="button" class="btn btn-secondary">Etc</button>
     </div>
-    <div class="card-deck">
-      <div class="row row-cols-1 row-cols-md-3" id="card-box"></div>
-    </div>
+    <div class="card-group"></div>
   </body>
 </html>

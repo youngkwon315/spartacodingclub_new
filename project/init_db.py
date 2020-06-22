@@ -15,7 +15,7 @@ def get_urls():
 
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    workouts = soup.select(
+    """workouts = soup.select(
         '#js-ex-category-body > div.ExCategory-results > div')
 
     for workout in workouts:
@@ -36,7 +36,7 @@ def get_urls():
                 'workout_part': part
             }
             db.fitlogdb.insert_one(doc)
-            print('완료!', title)
+            print('완료!', title)"""
 
 
 def newly_insert():
